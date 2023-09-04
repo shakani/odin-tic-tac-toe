@@ -1,5 +1,19 @@
 const Gameboard = (() => { // module pattern for the single game board
     let board = [[0,0,0],[0,0,0],[0,0,0]];
+
+    const clearBoard = () => {
+        Gameboard.board = [[0,0,0],[0,0,0],[0,0,0]];
+        cells = document.querySelectorAll('.cell');
+        cells.forEach(button => {
+            button.textContent = '';
+        });
+    };
+
+    const turn = (i, j, marker) => {
+        board[i][j] = marker;
+    };
+
+    return {board, clearBoard, turn};
 })();
 
 const Player = (marker) => { // player factory
@@ -21,3 +35,5 @@ for (let i = 0; i < 3; i++) {
     }
     // boardContainer.appendChild(rowContainer);
 }
+
+Gameboard.clearBoard();
