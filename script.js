@@ -33,20 +33,20 @@ const Gameboard = (() => { // module pattern for the single game board
         for (let i = 0; i < 3; i++) { // check rows
             let row = Gameboard.board[i];
             if (row[0] === row[1] && row[1] == row[2]) {
-                return true;
+                return row[0];
             }
         }
         for (let j = 0; j < 3; j++) { // check columns
             if (Gameboard.board[0][j] == Gameboard.board[1][j] && Gameboard.board[1][j] == Gameboard.board[2][j]) {
-                return true;
+                return Gameboard.board[0][j];
             }
         }
         // check diagonals
         if (Gameboard.board[0][0] == Gameboard.board[1][1] == Gameboard.board[2][2]) {
-            return true;
+            return Gameboard.board[1][1];
         }
         if (Gameboard.board[0][2] == Gameboard.board[1][1] == Gameboard.board[2][0]) {
-            return true;
+            return Gameboard.board[1][1];
         }
         return false;
     };
