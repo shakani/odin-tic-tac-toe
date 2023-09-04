@@ -3,17 +3,28 @@ const Gameboard = (() => { // module pattern for the single game board
 
     const clearBoard = () => {
         Gameboard.board = [[0,0,0],[0,0,0],[0,0,0]];
-        cells = document.querySelectorAll('.cell');
+        let cells = document.querySelectorAll('.cell');
         cells.forEach(button => {
             button.textContent = '';
         });
     };
 
-    const turn = (i, j, marker) => {
-        board[i][j] = marker;
+    const isValidMove = (i, j) => {
+        return Gameboard.board[i][j] === 0;
     };
 
-    return {board, clearBoard, turn};
+    const turn = (i, j, marker) => {
+        if (isValidMove(i, j)) {
+            Gameboard.board[i][j] = marker;
+            let cell = document.querySelector(`#cell-${i}-${j}`);
+            cell.textContent = marker;
+        }
+        else {
+            return 'INVALID MOVE';
+        }
+    };
+
+    return {board, clearBoard, isValidMove, turn};
 })();
 
 const Player = (marker) => { // player factory
