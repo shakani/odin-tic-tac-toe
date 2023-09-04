@@ -22,6 +22,12 @@ const Gameboard = (() => { // module pattern for the single game board
             let cell = document.querySelector(`#cell-${i}-${j}`);
             cell.textContent = marker;
             Gameboard.turnCounter++;
+
+            if(isGameOver()) {
+                alert(`${isGameOver()} wins!`);
+                Gameboard.clearBoard();
+                Gameboard.turnCounter = 0;
+            }
         }
         else {
             return 'INVALID MOVE';
@@ -33,21 +39,35 @@ const Gameboard = (() => { // module pattern for the single game board
         for (let i = 0; i < 3; i++) { // check rows
             let row = Gameboard.board[i];
             if (row[0] === row[1] && row[1] == row[2]) {
-                return row[0];
+                if(row[0]) {
+                    return row[0];
+                }
             }
         }
         for (let j = 0; j < 3; j++) { // check columns
             if (Gameboard.board[0][j] == Gameboard.board[1][j] && Gameboard.board[1][j] == Gameboard.board[2][j]) {
-                return Gameboard.board[0][j];
+                if(Gameboard.board[0][j]) {
+                    return Gameboard.board[0][j];
+                }
             }
         }
         // check diagonals
-        if (Gameboard.board[0][0] == Gameboard.board[1][1] == Gameboard.board[2][2]) {
-            return Gameboard.board[1][1];
+        if (Gameboard.board[0][0] == Gameboard.board[1][1] && Gameboard.board[1][1] == Gameboard.board[2][2]) {
+            if(Gameboard.board[1][1]) {
+                return Gameboard.board[1][1];
+            }
         }
-        if (Gameboard.board[0][2] == Gameboard.board[1][1] == Gameboard.board[2][0]) {
-            return Gameboard.board[1][1];
+        if (Gameboard.board[0][2] == Gameboard.board[1][1] && Gameboard.board[1][1] == Gameboard.board[2][0]) {
+            if(Gameboard.board[1][1]) {
+                return Gameboard.board[1][1];
+            }
         }
+
+        // checking for tie!
+        if (Gameboard.turnCounter == 9) {
+            return 'Tie! Nobody';
+        }
+
         return false;
     };
 
