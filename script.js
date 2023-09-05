@@ -24,7 +24,20 @@ const Gameboard = (() => { // module pattern for the single game board
             Gameboard.turnCounter++;
 
             if(isGameOver()) {
-                alert(`${isGameOver()} wins!`);
+                let winner = isGameOver();
+                let winnerName = '';
+                if (winner === 'X') {
+                    let winnerInput = document.querySelector('.x-player-input');
+                    winnerName = winnerInput.value.length ? winnerInput.value : 'X';
+                }
+                else if (winner === 'O') {
+                    let winnerInput = document.querySelector('.o-player-input');
+                    winnerName = winnerInput.value.length ? winnerInput.value : 'O';
+                }
+                else {
+                    winnerName = 'Tie! Nobody';
+                }
+                alert(`${winnerName} wins!`);
                 Gameboard.clearBoard();
                 Gameboard.turnCounter = 0;
             }
