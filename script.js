@@ -111,4 +111,9 @@ for (let i = 0; i < 3; i++) {
     // boardContainer.appendChild(rowContainer);
 }
 
+let restartBtn = document.querySelector('.restart-btn');
+restartBtn.addEventListener('click', () => {
+    Gameboard.clearBoard();
+});
+
 Gameboard.clearBoard();
